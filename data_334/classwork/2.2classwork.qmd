@@ -1,0 +1,163 @@
+---
+title: "2.2_classwork"
+format: html
+editor: visual
+---
+
+## 2.2: Grammar of Graphics
+
+DATA: The data set AES: Setting up the axis, etc GEOM: The way you are going to display the data (point, bar, etc)
+
+```{r}
+library(palmerpenguins)
+library(tidyverse)
+theme_set(theme_minimal())
+```
+
+STAT
+
+```{r}
+ggplot(data = penguins, aes(x = species)) +
+  geom_bar(stat = "count") ## don't need stat = "count" because it's the default.
+
+penguins_sum = penguins %>%
+  group_by(species) %>%
+  summarise(n_species = n())
+  
+ggplot(data = penguins_sum, aes(x = species, y = n_species))+
+  geom_bar(stat = "identity")
+## this is what geom_col does: it's geom_bar() with a stat = "identfy" statistical transformation
+```
+
+| species \| count \|
+| Adelie \| 150 \|
+| Chinstrap \| 60 \|
+| Gentoo \| 124 \|
+
+POSITION
+
+```{r}
+ggplot(data = penguins, aes(x = species, fill = sex)) +
+  geom_bar(position = "stack") + ## don't need "stack" because it's default
+  scale_fill_viridis_d()
+
+ggplot(data = penguins, aes(x = species, fill = sex)) +
+  geom_bar(position = "dodge") + ## dodge puts bars side by side instead of stacking
+  scale_fill_viridis_d()
+```
+
+COORDINATE FUNCTION
+
+controlled with cord_xxxxx() coord_cartesian() is the default.
+
+EXERCISE 1: Change the plot in one of the 4 ways discussed so far in class.
+
+```{r}
+ggplot(data = penguins, aes(x = bill_length_mm, y = bill_depth_mm)) +
+  geom_point()
+
+
+ggplot(data = penguins, aes(x = bill_length_mm, y = bill_depth_mm)) +
+  geom_point(position = "identity", stat = "identity")
+```
+
+Your Turn #6
+
+```{r}
+library(tidyverse)
+df <- read_csv("https://raw.githubusercontent.com/highamm/ds234_quarto/main/data_online/slu_graduates.csv") 
+
+## fixes error in the data
+df <- df |> mutate(across(everything(),
+                          .fns = ~replace(., . ==  "STATS" , "STAT")))
+
+## turns the data set from 1 row per graduating student
+## to 1 row per major-minor combination so that students
+## with more than one major-minor combo take up multiple
+## rows
+df_major_minor <- df |> filter(!is.na(minor1)) |> 
+  pivot_longer(starts_with("major"), names_to = "major_number",
+               values_to = "major") |>
+  filter(!is.na(major)) |>
+  pivot_longer(starts_with("minor"), names_to = "minor_number",
+               values_to = "minor") |>
+  filter(!is.na(minor))
+```
+
+Make a bar plot of the t15 major-minor combos in the past 9 years at SLU
+
+```{r}
+t15major_minor = df_major_minor %>%
+  group_by(major, minor) %>%
+  summarize(major_minor_count = n()) %>%
+  ungroup(major, minor) %>%
+  arrange(desc(major_minor_count)) %>% slice(1:15) %>%
+  unite("major_minor", c(major, minor), sep = "-") %>%
+  mutate(major_minor = fct_reorder(major_minor, major_minor_count))
+  
+```
+
+```{r}
+ggplot(data = t15major_minor, aes(x = major_minor_count, y = major_minor))+
+  geom_bar(stat = "identity", position = "identity")+
+  coord_cartesian()+ 
+  facet_null()
+```
+
+GIT
+
+```{r}
+usethis::use_git_config(user.name = "Baxter Lowell", user.email = "blowell19@icloud.com")
+usethis::create_github_token()
+```
+
+```{r}
+gitcreds::gitcreds_set()
+gitcreds::gitcreds_get()
+```
+
+## Section 2.3: Your Turn
+
+Exercises 1-4
+
+## 1. 
+
+```{r}
+ggplot(data = penguins, aes(x = bill_length_mm))+
+  geom_bar()+
+  labs(x = "bill length")
+```
+## 2. 
+
+```{r}
+ggplot(data = penguins, aes(x = species, y = bill_depth_mm))+
+  geom_boxplot()
+```
+
+## 3.
+
+```{r}
+ggplot(data = penguins, aes(x = bill_length_mm))+
+  geom_freqpoly(color = "orange")
+
+ggplot(data = penguins, aes(x = bill_length_mm, color = species))+
+  geom_freqpoly()
+```
+
+## 4.
+
+```{r}
+ggplot(data = penguins, aes(x = bill_length_mm, y = bill_depth_mm))+
+  geom_point()+
+  geom_smooth(aes(color = species))
+```
+
+## 5. Change 1/7 grammar of graphics parameters from one of the previous graphs.
+
+```{r}
+ggplot(data = penguins, aes(x = species, y = bill_length_mm))+
+  geom_boxplot()+
+  coord_flip()
+```
+
+

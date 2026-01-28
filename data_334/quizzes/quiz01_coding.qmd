@@ -1,0 +1,30 @@
+---
+title: "quiz01_coding"
+html: 
+  embed_resources: true
+editor: visual
+---
+
+"All work presented is my own, and I have followed all rules for collaboration. I have not used AI for this assignment. -Baxter Lowell
+
+# Question 1.
+
+```{r}
+library(tidyverse)
+diamonds
+ggplot(data = diamonds, aes(x = price))+
+  geom_histogram(color = "brown", fill = "white")+
+  facet_wrap(~cut)
+```
+
+# Question 2.
+
+```{r}
+library(tidyverse)
+diamonds
+ggplot(data = diamonds, aes(x = price))+
+  geom_histogram(color = "brown", fill = "white")+
+  facet_wrap(~cut)+
+  theme(plot.background = element_rect("grey"), axis.title = element_text(face = "bold"))
+```
+

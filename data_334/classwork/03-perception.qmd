@@ -1,0 +1,99 @@
+---
+title: "3.2_classwork"
+format: html
+editor: visual
+---
+
+# 3.2 Questions 1-5
+
+## 1: The second plot is better, want to have a consistent baseline when comparing data.
+
+## 2. We prefer the 2nd plot because it begins at 0 on the y axis, which helps to view the data correctly.
+
+## 3. We prefer the first plot because it gives us a more zoomed in comparison. Scatterplots and boxplots do not need to start at 0 since they do not encode length or area.
+
+## 4.
+
+### Pair 1: We prefer the first plot. It's easier to compare species when they are all plotted on the same axis. The coloring is better than the faceting in this case.
+
+### Pair 2: We prefer the faceted plot. There are two many colors in the first one which makes it hard to distinguish between the different groups, while in the second plot, the faceting makes it so that there are less colors in each faceted group.
+
+## 5. We prefer the bar plot, it's hard to compare angles, and there is a count on the bar plot.
+
+## 6.
+
+```{r}
+hpi_df <- read_csv("https://raw.githubusercontent.com/highamm/ds234_quarto/main/data_online/hpi-tidy.csv")
+hpi_df
+
+hpi_means = hpi_df %>%
+  group_by(Region)%>%
+  summarize(mean_hpi = mean(HappyPlanetIndex))
+##
+ggplot(data = hpi_df, aes(x = Region, y = HappyPlanetIndex))+
+  geom_jitter(width = 0.1)+
+  theme_minimal()+
+  coord_flip()+
+  geom_point(data = hpi_means, aes(y = mean_hpi),
+             shape = 8, color = "pink", size = 5)+
+  labs(caption = "The asterisks mark the mean HPI")
+
+```
+
+```{r}
+## bar plot of t10 countries showing the region for each country
+hpi_top10 = hpi_df %>%
+  arrange(desc(HappyPlanetIndex)) %>%
+  slice(1:10) %>%
+  mutate(Country = fct_reorder(Country, HappyPlanetIndex))
+
+ggplot(data = hpi_top10, aes(x = HappyPlanetIndex, y = Country, fill = Region))+
+  geom_col()+
+  scale_fill_viridis_d()
+  
+## a map would be even better. (Section 6)
+```
+
+## 7. 
+Qualitative makes the most sense. There is no ordering that makes sense that is sequential or diverging.
+
+scale_color_brewer() is for coloring by a categorical variable, (<chr> or <fct>)
+
+scale_color_distiller() is for coloring by a numeric variable.
+
+# Your Turn:
+
+## 1.
+
+a.
+Sequential (paler color for low cases, vibrant color for higher cases)
+
+b.
+diverging (paler color for no change)
+
+c.
+qualitative (2 categories)
+
+d.
+diverging (paler color for 0)
+
+## 2
+```{r}
+library(palmerpenguins)
+library(tidyverse)
+ggplot(data = penguins, aes(x = bill_length_mm, y = bill_depth_mm, color = body_mass_g))+
+  geom_point()+
+  scale_color_viridis_c()+
+  theme_linedraw()
+# _d() is only used to color or fill by categorical variables
+# _c() is used for quantitative variables
+# _b() bins the continuous variable and then colors by a set number of categorical bins
+```
+
+## 3: Messing with themes
+```{r}
+ggplot(data = hpi_df, aes(x = Footprint, y = Wellbeing, colour = Region)) +
+  geom_point()+
+  theme(plot.background = element_rect("purple"), panel.background = element_rect("red"), panel.grid.major = element_line("yellow"), legend.title = element_text(face = "bold"))
+```
+

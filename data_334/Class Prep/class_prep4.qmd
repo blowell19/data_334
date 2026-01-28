@@ -1,0 +1,38 @@
+---
+title: "class_prep_4"
+format: html
+editor: visual
+---
+
+## What is the difference between a colour’s hue and a colour’s intensity?
+
+- Hue is what we think of the actual color, red, blue, green for example, while intensity is how vibrant that particular hue is.
+
+## Think of an example where you would want to use a sequential colour scale that’s different from the one given in the text. Then, think of examples where you would use a diverging colour scale and an unordered colour scale.
+
+- I'd use a sequential color scale for temps would be accurat because they go from high to low. A diverging color scale might work when modeling politics, due to the different colors of the parties and that there is a middle point between the two. An unordered color scale might fit for modeling something like names, where there is really no meaning between the different names as opposed to temps.
+
+## Some gestalt inferences take priority over others. Using Figure 1.21, give an example of a gestalt inference that takes priority over another one.
+
+- Proximity over similarity. In this model, the points all look similar, but some are closer together than others.
+
+## “Bar charts are better than Pie charts for visualizing a single categorical variable.” Explain how results shown in Figure 1.23 support this claim.
+
+- The pie charts had a higher mean log error than the bar charts.
+
+## Suppose you have a scatterplot of height on the y-axis vs. weight on the x-axis for people born in Canada, Mexico, and the United States. You now want to explore whether the relationship is different for people born in the United States, people born in Canada, and people born in Mexico. Should you use different shapes to distinguish the three countries or should you use different colours? Explain using either Figure 1.24 or 1.25.
+
+- According to figure 1.25, colors are more effective than shapes for illustrating differences.
+
+## When might you use the left-side of Figure 1.27 to show the law school data? When might you use the right-side of Figure 1.27 to show the law school data?
+
+- The figure on the left would help push an anti law school agenda, because it makes the drop in enrollment seem a lot more than the figure on the right, which seems to minimize the affect of the decline on the graph.
+
+## Summary: What are two takeaways from Sections 1.3-1.7?
+
+- The same data can be used to push differing opinions
+-Being delibrate about color schemes is important.
+
+## What is one question that you have about the reading?
+
+- Are there any features to modeling data that are purely preference based or are they all delibrate?

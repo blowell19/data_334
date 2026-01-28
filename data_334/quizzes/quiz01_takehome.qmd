@@ -1,0 +1,58 @@
+---
+title: "quiz_1_takehome"
+html: 
+  embed-resources: true
+editor: visual
+---
+
+All work presented is my own, and I have followed all rules for collaboration. If I used any AI on this assignment, I have clearly stated both (1) what my search prompt was and (2) what I used from the AI answer. - Baxter Lowell
+
+Collaborated with: David Zuhlsdorf
+
+## 1.
+
+It is easiest to see group 5 due to the fact that there is a consistent baseline on which to compare each year since they all begin at a count of 0.
+
+## 2.
+
+### a.
+
+We would want to use a diverging scale, since we are dealing with a range of numbers and some could be positive, some could be negative, and some could be 0. 0 would be a pale color.
+
+### b.
+
+We would want to use a sequential scale, because we are working with data that can start by 0 and increase.
+
+## 3.
+
+### a.
+
+A histogram would be the best way to visualize the data since we have a singlular quantitative variable.
+
+### b.
+
+The histogram gives us the center, spread, shape and roughly the sample size, while the average only gives us the center.
+
+## 4.
+
+### a.
+
+Geom has been changed, the first graph uses geom_dotplot and the second uses geom_boxplot.
+
+### b.
+
+Coordinate has been changed by using coord_flip.
+
+### c.
+
+Position has been changed by giving a jitter to show denstity as specific HR amounts.
+
+## 5.
+
+### a.
+
+The first graph is better because the count starts at 0, which makes it easier to interpret the differences between the variables. Plots with counts should always start at 0.
+
+### b.
+
+The top graph is better. The bottom one has too much going on, which makes it harder to view trends and interpret what is going on. The top graph allows for easier comparisons across positions.
